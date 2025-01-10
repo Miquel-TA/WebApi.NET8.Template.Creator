@@ -1,24 +1,21 @@
-# WebApiTemplateGenerator
+# MyAppSolution
 
-This is a console-based .NET 8 generator that creates a complete Web API solution following DDD principles, with one project per layer:
+A .NET 8 Web API template using DDD with four projects:
+- **Cross**: Shared `User` model, `JwtUtils` & `BcryptUtils`.
+- **Logic**: Business logic with Interfaces & Implementations, DI-ready.
+- **Repository**: EF Core InMemory DB, seeded with random admin credentials.
+- **Presentation**: ASP.NET Core WebAPI (Swagger, JWT auth, Serilog logs).
 
-- Presentation (WebAPI)
-- Logic (with Interfaces and Implementations)
-- Repository (with Interfaces and Implementations)
-- Cross (for shared models and utilities)
+## Features
+- **JWT** usage: Acquire a token via `/api/crud/login` (passing username & password). Then use the `Authorization: Bearer <token>` header on protected endpoints.
+- **DI**: The solution wires up the logic & repository automatically (ServiceRegistration).
+- **References**: Projects reference Cross for shared code, Logic references Repository for DB, etc.
+- **Pinned Packages**: EF 8.0.11, JWT 8.3.0, bcrypt 4.0.3, Serilog 8.0.3, Swashbuckle 7.2.0 / 8.0.2.
+- **InMemory DB**: A `User` entity is CRUD-capable, default “admin” is seeded with random password from `appsettings.json`.
 
-### How It Works
-
-1. **Asks** you for a folder path.
-2. **Creates** a .NET 8 solution with the above projects.
-3. **Installs** pinned NuGet packages for JWT, EF, bcrypt, and so on.
-4. **Generates** code that uses InMemory EF for quick startup and seeds a random admin password.
-5. **Writes** an appsettings.json with random secrets (admin password, JWT key, issuer).
-
-### Quick Start
-
-- **Run** the generator.
-- **Open** the generated `MyAppSolution.sln`.
-- **Build** and run `MyApp.Presentation`.
-
-Enjoy your new solution!
+## Usage
+- **Build** & **Run** the `MyApp.Presentation` project.
+- **Swagger** available at `/swagger`.
+- **Login** with `POST /api/crud/login?username=admin&password=...`.
+- **CRUD** endpoints for user exist in `POST/GET/PUT/DELETE /api/crud/users`.
+- **Log** in console & `Logs/myapp-.log`.
