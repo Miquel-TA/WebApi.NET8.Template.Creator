@@ -1,5 +1,7 @@
 # WebApiTemplateGenerator
 
+Take a look at the generated solution - https://github.com/Miquel-TA/WebApi.NET8.Template
+
 Creates a full .NET 8 Web API solution with a DDD architecture:
 - **Cross** (Models & Utils)
 - **Logic** (Interfaces & Implementations)
